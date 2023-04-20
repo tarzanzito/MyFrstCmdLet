@@ -1,0 +1,25 @@
+
+Source = C:\Users\Paulo\Documents\PowerShell\Modules
+----------------------------------------------------
+
+PS E:\> get-command Set-Location2
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Set-Location2                                      0.0        MyDemo
+
+-----------------------------------------------------
+
+PS E:\> Get-command Send-Greeting
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Cmdlet          Send-Greeting                                      1.0.0.0    SendGreetings
+
+----------------------------------------------------
+
+PS E:\> Get-command cdl
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Alias           cdl -> Set-Location2

@@ -1,0 +1,11 @@
+dotnet new classlib --name myclasslib
+dotnet new globaljson
+dotnet add package PowerShellStandard.Library
+
+dotnet new -i Microsoft.PowerShell.Standard.Module.Template
+dotnet new psmodule
+
+
+https://www.youtube.com/watch?v=O0lk92W799g
+
+https://social.msdn.microsoft.com/Forums/vstudio/en-US/eac4c9ee-0a70-4656-95ec-65c14d9fa6af/powershell-via-managed-c-pscmdlet-vs-ps-command-vs-powershell-vs-cmdlet-classes?forum=netfxbcl

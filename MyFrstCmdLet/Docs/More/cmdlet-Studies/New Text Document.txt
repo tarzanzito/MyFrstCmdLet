@@ -1,0 +1,46 @@
+#requires -version 2
+ 
+param(
+    [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName="Command")]
+    [Management.Automation.CommandInfo] $Command,
+ 
+    [Parameter(Mandatory = $true, Position = 0, ValueFromPipeline = $true, ValueFromPipelineByPropertyName = $true, ParameterSetName="CommandName")]
+    [string] $CommandName
+)
+ 
+# TODO: use path to your Reflector instead
+$reflectorPath = "c:\Work\Tools\Reflector\Reflector.exe"
+ 
+if ($CommandName) {
+    $Command = Get-Command $CommandName
+}
+ 
+while ($Command.CommandType -eq "Alias") {
+    "Command '$($Command.Name)' is an alias for command '$($Command.Definition)'"
+    $Command = Get-Command $Command.Definition
+}
+ 
+switch ($Command.CommandType) {
+    "Cmdlet" {
+        $type = $Command.ImplementingType
+        $dll = $Command.DLL
+        if (-not (Test-Path $reflectorPath)) {
+            throw "Reflector is not found in '$reflectorPath'"
+        }
+ 
+        & $reflectorPath /select:$type $dll
+    }
+    "Function" {
+        "Command '$($Command.Name)' is a function with the following definition:`n`n$($Command.Definition)"
+    }
+    default {
+        "Command '$($Command.Name)' has an unsupported type $($Command.CommandType)"
+    }
+}
+
+
+Reflect-Cmdlet "Write-Host"
+ 
+"Write-Debug" | Reflect-Cmdlet
+ 
+Get-Command cls | Reflect-Cmdlet

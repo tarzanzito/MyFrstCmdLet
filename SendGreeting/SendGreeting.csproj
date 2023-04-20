@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <Version>$(VersionPrefix)</Version>
+  </PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="System.Management.Automation" Version="7.2.6" />
+	</ItemGroup>
+	
+</Project>

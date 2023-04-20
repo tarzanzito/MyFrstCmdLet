@@ -1,0 +1,21 @@
+﻿
+$profile
+
+copiar DLL para 
+C:\Users\Paulo\Documents\PowerShell\Modules
+
+se nome da dll = Example.dll
+criar folder e file
+C:\Users\Paulo\Documents\PowerShell\Modules\Example\Example.dll
+
+//////////////////
+
+get-module -ListAvailable
+
+get-command -Module MyFrstCmdLet
+
+Import-Module -Name MyFrstCmdLet
+Get-Module -Name MyFrstCmdLet
+
+Set-LocationLegacy "c:\Yes [Drama]"
+

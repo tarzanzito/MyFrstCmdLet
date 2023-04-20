@@ -1,0 +1,41 @@
+
+
+$DLLPath = 'E:\_MEGA_DRIVE\__GitHub\__NAO_DICIONADOS_AINDA\MyFrstCmdLet\PowerShellCmdletInCSharpExample-master\src\SendGreetings\bin\Debug\net6.0\SendGreetings.dll'
+
+Import-Module -Name $DLLPath
+
+###########################################
+
+Get-Module SendGreetings
+
+Get-Command -Module ModuleName
+
+Get-Command send*
+
+Send-Greeting -name "Paulo Goncalves"
+
+###########################################
+
+Add-Type -AssemblyName 'System.Windows.Forms'
+Add-Type -AssemblyName 'C:\src\universal\src\output\Universal.Cmdlets.dll'
+
+#############################################
+
+Get-Module -ListAvailable
+
+####################
+os modules têm de ficar em var\Modules:
+
+$PShome  = 'C:\Program Files\PowerShell\7'   \Modules
+ou em 
+$Env:PSModulePath = 'C:\Users\Paulo\Documents\PowerShell\Modules'
+
+
+neste exemplo : SendGreetings.dll
+
+$PShome\Modules\SendGreetings
+dentro do folder colocar a DLL  (folder e nome da dll iguais)
+
+
+
+

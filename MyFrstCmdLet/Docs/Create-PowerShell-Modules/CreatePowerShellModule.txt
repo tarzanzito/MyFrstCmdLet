@@ -1,0 +1,102 @@
+Modules Locations
+------------------
+
+-> $PSCommandPath - this variable show full path for 'profile.ps1'
+                 this file are executed on start of any session of powershell
+
+-> $Profile - this variavel show the Full Path for file (ps1). current user
+           this file are executed on start of any session of powershell
+
+result example:
+---------------------------------------------------------------------------------
+-> $PROFILE - Current User, Current Host 
+C:\Users\Paulo\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+
+-> $PROFILE.CurrentUserCurrentHost - Current User, Current Host  
+C:\Users\Paulo\Documents\PowerShell\Microsoft.PowerShell_profile.ps1
+
+-> $PROFILE.CurrentUserAllHosts - Current User, All Hosts 
+C:\Users\Paulo\Documents\PowerShell\profile.ps1
+
+-> $PROFILE.AllUsersCurrentHost - All Users, Current Host  
+C:\Program Files\PowerShell\7\Microsoft.PowerShell_profile.ps1
+
+-> $PROFILE.AllUsersAllHosts - All Users, All Hosts 
+C:\Program Files\PowerShell\7\profile.ps1
+
+
+execution order:
+$PROFILE.AllUsersAllHosts
+$PROFILE.AllUsersCurrentHost
+$PROFILE.CurrentUserAllHosts
+$PROFILE.CurrentUserCurrentHost
+
+----------------------------------------------------------------
+
+-> $PsHome - Full Path of pwsh.exe
+-> $Host = Get-Host
+-> $Home  = cd ~
+
+----------------------------------------------------------------
+
+Modules are installed at sub folders:
+
+$PsHome\Modules - AllUsers
+$Home\PowerShell\Modules - CurrentUser
+
+---------------------------------------------------------------
+
+Modules in PowerShell (*.psm1)
+
+- modules are set in subfolder "Modules" folder
+- subfolder must be the some name of file (*.psm1)
+
+example: MyExample.psm1
+\Modules\MyExample\MyExample.psm1
+
+confirmming:
+-> get-module -ListAvailable
+
+    Directory: C:\Users\Paulo\Documents\PowerShell\Modules
+
+ModuleType Version    PreRelease Name                                PSEdition ExportedComma
+                                                                               nds
+---------- -------    ---------- ----                                --------- -------------
+Script     0.0                   MyExample                           Desk      {Get-RandomD…
+
+
+------------------------------------------------------------------
+
+Create manifest file for MyExample.psm1
+
+# https://www.youtube.com/watch?v=egbg8MSAbUo
+
+- On folder with module file execute:
+-> New-ModuleManifest -Path 'MyExample.psd1' -RootModule 'MyExample.psm1' -ModuleVersion '2.3.4' -Author 'me' -Description 'desc'
+
+-> ls
+    Directory: C:\Users\Paulo\Documents\PowerShell\Modules\MyExample
+
+Mode                 LastWriteTime         Length Name
+----                 -------------         ------ ----
+-a---          2023/04/17    12:08           4156 MyExample.psd1
+-a---          2023/04/17    12:03            720 MyExample.psm1
+
+
+-> get-module -ListAvailable
+
+    Directory: C:\Users\Paulo\Documents\PowerShell\Modules
+
+ModuleType Version    PreRelease Name                                PSEdition ExportedComma
+                                                                               nds
+---------- -------    ---------- ----                                --------- -------------
+Script     2.3.4                 MyExample                           Desk      {Get-RandomD…
+
+
+-> Get-Command -Module MyExample
+
+CommandType     Name                                               Version    Source
+-----------     ----                                               -------    ------
+Function        Get-ListOfFiles                                    2.3.4      MyExample
+Function        Get-RandomDate                                     2.3.4      MyExample
+Function        Write-Message                                      2.3.4      MyExample

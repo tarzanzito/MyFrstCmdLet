@@ -1,0 +1,5 @@
+https://www.youtube.com/watch?v=WvxUuru_vhk
+
+runspaces
+
+https://learn.microsoft.com/en-us/powershell/scripting/developer/hosting/creating-runspaces?view=powershell-7.3

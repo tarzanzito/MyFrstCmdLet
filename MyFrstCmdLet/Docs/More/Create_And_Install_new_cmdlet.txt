@@ -1,0 +1,78 @@
+1-Create a file "Simple.ps1" (with next content)
+#---------------------------------
+function Do-Something
+{
+    Write-Host "i am in my function !!!!"
+}
+
+#to test on run
+Do-Something
+#------------------------------------
+
+2-open PowerShell terminal in folder of new file and test script
+
+./Sample.ps1
+
+
+3- find path where runtime powerShell is installed
+C:\Program Files\PowerShell\7
+
+4- Change to folder "Modules"
+C:\Program Files\PowerShell\7\Modules
+
+5-Create new folder "MyDemo"
+C:\Program Files\PowerShell\7\Modules\MyDemo
+
+6-Create new file "MyDemo.psm1" (note: FILE MUST HAVE THE SAME NAME OF FOLDER!)
+#---------------------------------
+function Do-Something
+{
+    Write-Host "i am in my function !!!!"
+}
+
+Export-ModuleMember -Function "Do-Something"  -> parece-me nao ser preciso !!!!
+#---------------------------------
+
+7-open new PowerShell terminal in any folder
+
+Do-Something
+
+8- Create Basic CmdLet (and go to step 5)
+ FileName "MyDemo.psm1"  (module)
+#---------------------------------------------
+Function My-Something
+{
+	[CmdletBinding()]
+	param
+	(
+		[Parameter(Mandatory=$false,
+                HelpMessage="Msg from computer.")] 
+		[string]$Msg,
+
+		[Parameter(Mandatory=$false,
+                HelpMessage="Source computer.")]
+		[string]$Source
+	)
+	BEGIN
+	{ 
+		Write-Host "BEGIN"
+		$errorlogfile = "$home\Documents\PSlogs\Error_Log.txt"	
+        }
+	}
+	PROCESS
+	{  
+		Write-Host "PROCESS"
+		Write-Host $errorlogfile 
+		Write-Host $Msg
+		Write-Host $Source
+	}        
+	END
+	{ 
+		Write-Host "END"
+	}
+}
+
+Export-ModuleMember -Function "My-Something"
+#---------------------------------------------------
+
+
